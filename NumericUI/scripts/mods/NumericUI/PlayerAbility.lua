@@ -2,15 +2,14 @@ local mod = get_mod("NumericUI")
 local HudElementPlayerAbilitySettings = require(
 	"scripts/ui/hud/elements/player_ability/hud_element_player_ability_settings"
 )
-local HudElementPlayerAbilityHandlerSettings = require(
-	"scripts/ui/hud/elements/player_ability_handler/hud_element_player_ability_handler_settings"
-)
-local ColorUtilities = require("scripts/utilities/ui/colors")
 local UIWidget = require("scripts/managers/ui/ui_widget")
 local UIFontSettings = require("scripts/managers/ui/ui_font_settings")
+
 local style = table.clone(UIFontSettings.hud_body)
 style.text_horizontal_alignment = "center"
 style.text_vertical_alignment = "center"
+
+-- selene: allow(global_usage)
 mod:hook(_G, "dofile", function(func, path)
 	local instance = func(path)
 	if path == "scripts/ui/hud/elements/player_ability/hud_element_player_ability_vertical_definitions" then
@@ -60,7 +59,11 @@ mod:hook_safe("HudElementPlayerAbility", "update", function(self)
 				local ability_state_component = unit_data_extension:read_component("combat_ability")
 				local time = Managers.time:time("gameplay")
 				local time_remaining = ability_state_component.cooldown - time
-				text_widget.content.text = string.format("%ds", time_remaining)
+				if time_remaining <= 1 then
+					text_widget.content.text = string.format("%.1fs", time_remaining)
+				else
+					text_widget.content.text = string.format("%ds", time_remaining)
+				end
 			else
 				text_widget.content.text = " "
 			end
@@ -68,7 +71,9 @@ mod:hook_safe("HudElementPlayerAbility", "update", function(self)
 		text_widget.dirty = true
 	end
 
-	if progress < 1.0 then
-		ability_widget.content.duration_progress = 0.0
+	if mod:get("disable_ability_background_progress") then
+		if progress < 1.0 then
+			ability_widget.content.duration_progress = 0.0
+		end
 	end
 end)
