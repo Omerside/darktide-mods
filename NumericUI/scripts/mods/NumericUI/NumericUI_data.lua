@@ -31,9 +31,24 @@ return {
 						default_value = true,
 					},
 					{
+						setting_id = "peril_icon",
+						type = "checkbox",
+						default_value = true,
+					},
+					{
 						setting_id = "ammo_as_percent",
 						type = "checkbox",
 						default_value = false,
+					},
+					{
+						setting_id = "ability_cd_bar",
+						type = "checkbox",
+						default_value = true,
+					},					
+					{
+						setting_id = "ability_cd_text",
+						type = "checkbox",
+						default_value = true,
 					},
 				},
 			},
@@ -77,6 +92,21 @@ return {
 						type = "checkbox",
 						default_value = true,
 					},
+					{
+						setting_id = "show_max_ammo_as_percent",
+						type = "checkbox",
+						default_value = false,
+					},
+					{
+						setting_id = "show_munitions_gained",
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "show_ammo_amount_from_packs",
+						type = "checkbox",
+						default_value = true,
+					},
 				},
 			},
 			{
@@ -95,6 +125,23 @@ return {
 					},
 					{
 						setting_id = "disable_ability_background_progress",
+						type = "checkbox",
+						default_value = true,
+					},
+				},
+			},
+			{
+				setting_id = "mission_timer",
+				type = "group",
+				sub_widgets = {
+					{
+						setting_id = "show_mission_timer",
+						type = "checkbox",
+						default_value = true,
+					},
+
+					{
+						setting_id = "mission_timer_in_overlay",
 						type = "checkbox",
 						default_value = true,
 					},
