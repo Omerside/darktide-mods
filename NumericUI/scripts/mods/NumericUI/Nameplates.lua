@@ -20,7 +20,6 @@ mod:hook_require(
 					.. ","
 					.. player_slot_color[4]
 					.. ")}"
-				-- local character_level = profile and profile.current_level or 1
 				local archetype = profile and profile.archetype
 				local string_symbol = archetype and archetype.string_symbol or ""
 
